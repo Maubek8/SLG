@@ -9,14 +9,9 @@
   "author": "Seu Nome",
   "license": "MIT",
   "dependencies": {
-<<<<<<< HEAD
-   "electron": "^33.0.1"
-,    "nodemailer": "^6.0.0",
-=======
->>>>>>> 97cc62d (Atualizar ia.js para usar chave de API a partir do .env)
-    "@tensorflow/tfjs": "^3.9.0",
     "electron": "^33.0.1",
     "nodemailer": "^6.0.0",
-    "openai": "^4.68.0"
+    "@tensorflow/tfjs": "^3.9.0",
+    "openai": "^3.0.0"
   }
 }
