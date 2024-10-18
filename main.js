@@ -1,28 +1,20 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-let mainWindow;
-
-function createWindow() {
-  mainWindow = new BrowserWindow({
+function createWindow () {
+  const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // Carregue o `preload.js` se precisar fazer a ponte entre o renderizador e o Node.js.
-      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true, // Evita ataques de protótipos
       enableRemoteModule: false,
-      nodeIntegration: false
+      nodeIntegration: false // Mantenha false para evitar problemas de segurança
     }
   });
 
-  mainWindow.loadFile('index.html'); // Carregue o arquivo HTML de entrada.
-  
-  // Abre o DevTools (somente para depuração; remova em produção).
-  // mainWindow.webContents.openDevTools();
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+  mainWindow.loadFile('index.html');
+  mainWindow.webContents.openDevTools(); // Remova essa linha em produção
 }
 
 app.on('ready', createWindow);
@@ -34,7 +26,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) {
+  if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
