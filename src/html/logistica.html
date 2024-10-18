@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logística - SLG</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>SIMGEs-Simlab</h2>
+            <p>Powered by MK</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="atendimento.html">Atendimento</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="cronograma.html">Cronograma</a></li>
+                <li><a href="financeiro.html">Financeiro</a></li>
+                <li><a href="logistica.html" class="active">Logística</a></li>
+                <li><a href="recursos-humanos.html">Recursos Humanos</a></li>
+                <li><a href="satisfacao.html">Satisfação</a></li>
+                <li><a href="login.html">Sair</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="analysis-button" onclick="openAIAnalysis()">Análise IA</button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Logística SIMGEs</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="action-buttons">
+                <button class="action-button primary-button" onclick="openModal('newRequestModal')">Nova Solicitação</button>
+                <button class="action-button secondary-button" onclick="openModal('inventoryModal')">Gerenciar Inventário</button>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-item">
+                    <h2>Inventário</h2>
+                    <div class="inventory-list" id="inventoryList">
+                        <!-- Lista de inventário será preenchida dinamicamente -->
+                    </div>
+                </div>
+                <div class="dashboard-item">
+                    <h2>Solicitações Pendentes</h2>
+                    <div class="pending-requests" id="pendingRequests">
+                        <!-- Solicitações pendentes serão preenchidas dinamicamente -->
+                    </div>
+                </div>
+                <div class="dashboard-item">
+                    <h2>Uso de Recursos</h2>
+                    <div class="chart-container">
+                        <canvas id="resourceUsageChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-item">
+                    <h2>Status das Salas</h2>
+                    <div class="room-list" id="roomList">
+                        <!-- Status das salas será preenchido dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="ai-analysis-modal" class="ai-analysis-modal">
+        <div class="ai-analysis-content">
+            <span class="close" onclick="closeAIAnalysis()">&times;</span>
+            <h2>Análise IA</h2>
+            <textarea id="ai-input" placeholder="Digite sua pergunta..."></textarea>
+            <button onclick="sendAIQuery()">Enviar</button>
+            <div id="ai-response"></div>
+        </div>
+    </div>
+
+    <script>
+        // Funções de Análise IA
+        function openAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'block';
+        }
+
+        function closeAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'none';
+        }
+
+        function sendAIQuery() {
+            const input = document.getElementById('ai-input').value;
+            if (input) {
+                // Aqui você integraria com a API de IA para obter uma resposta
+                document.getElementById('ai-response').innerHTML = "Resposta da IA: " + input;
+            }
+        }
+    </script>
+</body>
+
+</html>
 
