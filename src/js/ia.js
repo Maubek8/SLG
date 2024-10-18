@@ -1,4 +1,4 @@
-const apiKey = 'sk-TawN9PwYPW96nEgQuBt1aWu5pGWp--Dc2jy2afhKrNT3BlbkFJh0pY2yqokE6VuLZsJ6q1qHiKaBQPTzH40O1XXaUSoA';  // Insira sua chave de API da OpenAI
+const apiKey = process.env.OPENAI_API_KEY;
 
 async function askAI() {
     const prompt = document.getElementById('iaPrompt').value;
