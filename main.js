@@ -15,6 +15,7 @@ function createWindow() {
     }
   });
 
+  // Carrega a interface do arquivo HTML
   mainWindow.loadFile('index.html');
 
   mainWindow.on('closed', function () {
