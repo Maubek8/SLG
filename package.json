@@ -1,1 +1,28 @@
+{
+  "name": "SLG",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão Laboratorial",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Seu Nome",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.0.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "electron": "^12.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maubek8/SLG.git"
+  },
+  "keywords": [
+    "simlab",
+    "electron",
+    "ia",
+    "laboratorio"
+  ]
+}
 
