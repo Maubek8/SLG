@@ -1,21 +1,40 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('login-form');
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Previne o comportamento padrão de recarregar a página
+let mainWindow;
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+function createWindow() {
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'), // Carregue o `preload.js` se precisar fazer a ponte entre o renderizador e o Node.js.
+      contextIsolation: true,
+      enableRemoteModule: false,
+      nodeIntegration: false
+    }
+  });
 
-        // Realizar a autenticação
-        login(username, password);
-    });
+  mainWindow.loadFile('index.html'); // Carregue o arquivo HTML de entrada.
+  
+  // Abre o DevTools (somente para depuração; remova em produção).
+  // mainWindow.webContents.openDevTools();
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
+app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
-function login(username, password) {
-    if (username === 'admin' && password === '1234') {
-        window.location.href = '../../html/dashboard.html';
-    } else {
-        alert('Usuário ou senha incorretos');
-    }
-}
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
