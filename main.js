@@ -8,7 +8,10 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            preload: path.join(__dirname, 'src/js/preload.js'), // Pré-carregamento seguro
+            contextIsolation: true, // Garante que o contexto da página web seja isolado do contexto Node.js
+            enableRemoteModule: false, // Desabilita o uso do módulo remoto
+            nodeIntegration: false // Recomendado false para segurança
         }
     });
 
@@ -37,4 +40,3 @@ app.on('activate', function () {
         createWindow();
     }
 });
-
