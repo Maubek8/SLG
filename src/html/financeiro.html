@@ -29,6 +29,9 @@
                 <li><a href="login.html">Sair</a></li>
             </ul>
         </nav>
+        <div class="sidebar-footer">
+            <button class="analysis-button" onclick="openAIAnalysis()">Análise IA</button>
+        </div>
     </aside>
 
     <!-- Conteúdo Principal -->
@@ -98,6 +101,16 @@
             </div>
         </section>
     </main>
+
+    <div id="ai-analysis-modal" class="ai-analysis-modal">
+        <div class="ai-analysis-content">
+            <span class="close" onclick="closeAIAnalysis()">&times;</span>
+            <h2>Análise IA</h2>
+            <textarea id="ai-input" placeholder="Digite sua pergunta..."></textarea>
+            <button onclick="sendAIQuery()">Enviar</button>
+            <div id="ai-response"></div>
+        </div>
+    </div>
 
     <script>
         // Dados simulados para os gráficos
@@ -208,6 +221,4 @@
             alert("Formulário de registro de despesa será aberto aqui.");
         }
 
-        function generateFinancialReport() {
-            alert("Relatório financeiro ser
-
+        function
