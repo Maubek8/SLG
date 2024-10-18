@@ -2,15 +2,10 @@ require('dotenv').config();
 
 const apiKey = process.env.OPENAI_API_KEY;
 
-async function askAI() {
-    const prompt = document.getElementById('iaPrompt').value;
-
+async function askAI(prompt) {
     if (!prompt) {
-        document.getElementById('iaResponse').textContent = 'Por favor, digite uma pergunta.';
-        return;
+        return 'Por favor, digite uma pergunta.';
     }
-
-    document.getElementById('iaResponse').textContent = 'Aguardando resposta...';
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -27,9 +22,11 @@ async function askAI() {
         });
 
         const data = await response.json();
-        document.getElementById('iaResponse').textContent = data.choices[0].text.trim();
+        return data.choices[0].text.trim();
     } catch (error) {
-        document.getElementById('iaResponse').textContent = 'Erro ao obter resposta da IA.';
         console.error('Erro:', error);
+        return 'Erro ao obter resposta da IA.';
     }
 }
+
+module.exports = { askAI };
