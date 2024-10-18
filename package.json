@@ -1,1 +1,17 @@
-
+{
+  "name": "slg",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão SimLab com IA",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "MK",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^33.0.1",
+    "nodemailer": "^6.0.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "openai": "^3.0.0"
+  }
+}
