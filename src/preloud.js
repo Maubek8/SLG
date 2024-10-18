@@ -4,13 +4,13 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
   sendToMain: (channel, data) => {
     // whitelist channels to prevent exposing all IPC channels
-    const validChannels = ['toMain'];
+    const validChannels = ['toMain', 'login', 'analyzeData'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
   },
   receiveFromMain: (channel, func) => {
-    const validChannels = ['fromMain'];
+    const validChannels = ['fromMain', 'loginResult', 'analysisResult'];
     if (validChannels.includes(channel)) {
       // Remove the listener if exists to avoid memory leaks
       ipcRenderer.removeAllListeners(channel);
