@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SLG</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="logo">SIMGEs</div>
+      <div class="menu-item">Dashboard</div>
+      <div class="menu-item" onclick="window.location.href='https://simges.edu/financeiro'">Financeiro</div>
+      <div class="menu-item">Recursos Humanos</div>
+      <div class="menu-item">Logística</div>
+      <div class="menu-item">Atendimento</div>
+      <div class="menu-item">Relatórios</div>
+      <div class="menu-item">Acessos</div>
+      <div class="menu-item">Cronograma</div>
+      <div class="menu-item">Satisfação</div>
+    </div>
 
+    <div class="content">
+      <div class="header">
+        <h1>Dashboard SLG</h1>
+      </div>
+
+      <!-- Gráficos e Atividades -->
+      <div class="dashboard-grid">
+        <div class="dashboard-item">
+          <h3>Satisfação dos Usuários</h3>
+          <div class="chart-container">
+            <canvas id="satisfactionChart"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <h3>Ocupação de Salas</h3>
+          <div class="chart-container">
+            <canvas id="occupancyChart"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <h3>Cronograma de Atividades do Dia</h3>
+          <div id="scheduleContainer" style="height: 250px; overflow-y: auto;"></div>
+        </div>
+        <div class="dashboard-item">
+          <h3>Atendimento por Módulos de Habilidades</h3>
+          <div class="chart-container">
+            <canvas id="modulesChart"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-item">
+          <h3>Produtividade x Ociosidade</h3>
+          <div class="chart-container">
+            <canvas id="productivityChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Módulos de Habilidades -->
+      <div class="module-buttons">
+        <button class="module-button" onclick="openModule('emergencia')">Emergência</button>
+        <button class="module-button" onclick="openModule('aph')">APH</button>
+        <button class="module-button" onclick="openModule('enfermaria')">Enfermaria</button>
+        <button class="module-button" onclick="openModule('posto-enfermagem')">Posto de Enfermagem</button>
+        <button class="module-button" onclick="openModule('farmacia')">Farmácia</button>
+        <button class="module-button" onclick="openModule('uti')">UTI</button>
+        <button class="module-button" onclick="openModule('centro-cirurgico')">Centro Cirúrgico</button>
+        <button class="module-button" onclick="openModule('esterilizacao')">Esterilização</button>
+        <button class="module-button" onclick="openModule('sala-recuperacao')">Sala de Recuperação</button>
+        <button class="module-button" onclick="openModule('ginecologia')">Ginecologia</button>
+        <button class="module-button" onclick="openModule('obstetricia')">Obstetrícia</button>
+        <button class="module-button" onclick="openModule('ubs-simulada')">UBS Simulada</button>
+      </div>
+
+      <!-- Integração com a IA OpenAI -->
+      <div class="dashboard-item">
+        <h3>Consultor IA</h3>
+        <textarea id="iaPrompt" placeholder="Digite sua pergunta aqui..." rows="3" style="width: 100%;"></textarea>
+        <button class="module-button" onclick="askAI()">Perguntar à IA</button>
+        <div id="iaResponse" style="margin-top: 20px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Funções e Gráficos -->
+  <script src="../js/ia.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

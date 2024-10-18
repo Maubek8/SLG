@@ -1,1 +1,17 @@
-
+{
+  "name": "SLG",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão Laboratorial com IA",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Seu Nome",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^12.0.0",
+    "nodemailer": "^6.0.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "openai": "^3.0.0"
+  }
+}
