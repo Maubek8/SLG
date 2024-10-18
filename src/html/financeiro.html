@@ -1,1 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro - SLG</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>SIMGEs-Simlab</h2>
+            <p>Powered by MK</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="atendimento.html">Atendimento</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="cronograma.html">Cronograma</a></li>
+                <li><a href="financeiro.html" class="active">Financeiro</a></li>
+                <li><a href="logistica.html">Logística</a></li>
+                <li><a href="recursos-humanos.html">Recursos Humanos</a></li>
+                <li><a href="satisfacao.html">Satisfação</a></li>
+                <li><a href="login.html">Sair</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Gestão Financeira</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="financial-grid">
+                <div class="financial-item">
+                    <h3>Receitas vs Despesas</h3>
+                    <div class="chart-container">
+                        <canvas id="revenueExpenseChart"></canvas>
+                    </div>
+                </div>
+                <div class="financial-item">
+                    <h3>Distribuição de Custos</h3>
+                    <div class="chart-container">
+                        <canvas id="costDistributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="financial-item">
+                    <h3>Fluxo de Caixa</h3>
+                    <div class="chart-container">
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+                <div class="financial-item">
+                    <h3>Orçamento vs Realizado</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetVsActualChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="financial-item">
+                <h3>Resumo Financeiro</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Valor (R$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Receitas Totais</td>
+                            <td>1.500.000,00</td>
+                        </tr>
+                        <tr>
+                            <td>Despesas Totais</td>
+                            <td>1.200.000,00</td>
+                        </tr>
+                        <tr>
+                            <td>Saldo</td>
+                            <td>300.000,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-button" onclick="showBudgetForm()">Registrar Orçamento</button>
+                <button class="action-button" onclick="showExpenseForm()">Registrar Despesa</button>
+                <button class="action-button" onclick="generateFinancialReport()">Gerar Relatório</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Dados simulados para os gráficos
+        const revenueExpenseData = {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [{
+                label: 'Receitas',
+                data: [150000, 160000, 155000, 170000, 165000, 180000],
+                borderColor: '#2ecc71',
+                fill: false
+            }, {
+                label: 'Despesas',
+                data: [120000, 125000, 130000, 135000, 130000, 140000],
+                borderColor: '#e74c3c',
+                fill: false
+            }]
+        };
+
+        const costDistributionData = {
+            labels: ['Pessoal', 'Materiais', 'Infraestrutura', 'Tecnologia', 'Outros'],
+            datasets: [{
+                data: [50, 20, 15, 10, 5],
+                backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e67e22', '#95a5a6']
+            }]
+        };
+
+        const cashFlowData = {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [{
+                label: 'Fluxo de Caixa',
+                data: [30000, 35000, 25000, 35000, 35000, 40000],
+                borderColor: '#3498db',
+                fill: false
+            }]
+        };
+
+        const budgetVsActualData = {
+            labels: ['Pessoal', 'Materiais', 'Infraestrutura', 'Tecnologia', 'Outros'],
+            datasets: [{
+                label: 'Orçado',
+                data: [600000, 250000, 200000, 150000, 100000],
+                backgroundColor: '#3498db'
+            }, {
+                label: 'Realizado',
+                data: [580000, 240000, 190000, 160000, 90000],
+                backgroundColor: '#2ecc71'
+            }]
+        };
+
+        // Configuração e renderização dos gráficos
+        new Chart(document.getElementById('revenueExpenseChart').getContext('2d'), {
+            type: 'line',
+            data: revenueExpenseData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('costDistributionChart').getContext('2d'), {
+            type: 'pie',
+            data: costDistributionData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        new Chart(document.getElementById('cashFlowChart').getContext('2d'), {
+            type: 'line',
+            data: cashFlowData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('budgetVsActualChart').getContext('2d'), {
+            type: 'bar',
+            data: budgetVsActualData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Funções para as ações dos botões
+        function showBudgetForm() {
+            alert("Formulário de registro de orçamento será aberto aqui.");
+        }
+
+        function showExpenseForm() {
+            alert("Formulário de registro de despesa será aberto aqui.");
+        }
+
+        function generateFinancialReport() {
+            alert("Relatório financeiro ser
 
