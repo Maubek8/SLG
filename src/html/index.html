@@ -1,96 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMGEs - Login</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" href="../images/favi.ico" type="image/x-icon">
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            background: url('../images/do.png') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 300px;
-            margin-right: 10%;
-        }
-
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 10px;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .branding {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            text-align: right;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-        }
-
-        .branding h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .branding p {
-            margin: 5px 0 0;
-            font-size: 12px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLG - Sistema de Gestão SimLab</title>
+  <link rel="stylesheet" href="src/css/style.css">
 </head>
-
 <body>
-    <div class="branding">
-        <h2>SIMGEs - SimLab</h2>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>SIMGEs-Simlab</h1>
         <p>Powered by MK</p>
+      </div>
+      <button id="login-button">Entrar</button>
     </div>
+  </header>
 
-    <div class="login-container">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <button type="submit">Entrar</button>
-        </form>
-    </div>
+  <div class="login-container" id="login-container">
+    <form id="login-form">
+      <h1>Login</h1>
+      <input type="text" id="username" placeholder="Usuário" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            window.location.href = 'dashboard.html';
-        });
-    </script>
+  <script src="src/js/renderer.js"></script>
+  <script src="src/js/main.js"></script>
 </body>
-
 </html>
