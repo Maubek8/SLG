@@ -1,48 +1,21 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
 
-let mainWindow;
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne o comportamento padrão de recarregar a página
 
-function createWindow() {
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        show: false,  // Inicialmente não exibe a janela até que esteja pronta
-        webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-            webSecurity: true,
-            preload: path.join(__dirname, 'src/js/preload.js')  // Arquivo para comunicação segura
-        }
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Realizar a autenticação
+        login(username, password);
     });
+});
 
-    // Carregar a página de login ao iniciar
-    mainWindow.loadFile(path.join(__dirname, 'src/html/login.html'));
-
-    // Mostrar a janela quando estiver pronta
-    mainWindow.once('ready-to-show', () => {
-        mainWindow.show();
-    });
-
-    // Se a janela for fechada
-    mainWindow.on('closed', function () {
-        mainWindow = null;
-    });
+function login(username, password) {
+    if (username === 'admin' && password === '1234') {
+        window.location.href = '../../html/dashboard.html';
+    } else {
+        alert('Usuário ou senha incorretos');
+    }
 }
-
-// Quando o Electron estiver pronto para iniciar
-app.on('ready', createWindow);
-
-// Fechar o aplicativo quando todas as janelas forem fechadas
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-// Criar nova janela se o aplicativo for ativado novamente
-app.on('activate', function () {
-    if (mainWindow === null) {
-        createWindow();
-    }
-});
