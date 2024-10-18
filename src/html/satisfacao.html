@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMGEs - Pesquisa de Satisfação</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>SIMGEs-Simlab</h2>
+            <p>Powered by MK</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="atendimento.html">Atendimento</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="cronograma.html">Cronograma</a></li>
+                <li><a href="financeiro.html">Financeiro</a></li>
+                <li><a href="logistica.html">Logística</a></li>
+                <li><a href="recursos-humanos.html">Recursos Humanos</a></li>
+                <li><a href="satisfacao.html" class="active">Satisfação</a></li>
+                <li><a href="index.html">Sair</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="analysis-button" onclick="openAIAnalysis()">Análise IA</button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Pesquisa de Satisfação</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="satisfaction-section">
+                <h2>Resumo de Satisfação</h2>
+                <div class="filter-container">
+                    <select id="categoryFilter" onchange="updateChart()">
+                        <option value="modulo">Por Módulo</option>
+                        <option value="curso">Por Curso</option>
+                        <option value="disciplina">Por Disciplina</option>
+                        <option value="limpeza">Por Limpeza</option>
+                        <option value="atendimento">Por Atendimento de Funcionários</option>
+                        <option value="professores">Por Professores</option>
+                        <option value="didatica">Por Didática</option>
+                        <option value="educacao">Por Educação</option>
+                        <option value="roteiro">Por Roteiro</option>
+                    </select>
+                    <button onclick="toggleChartDataType()">Alternar Valor/Porcentagem</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="satisfactionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="satisfaction-section link-generator">
+                <h2>Gerador de Link para Pesquisa</h2>
+                <select id="userType">
+                    <option value="">Selecione o Tipo de Usuário</option>
+                    <option value="aluno">Aluno</option>
+                    <option value="professor">Professor</option>
+                    <option value="funcionario">Funcionário</option>
+                </select>
+                <input type="text" id="surveyName" placeholder="Nome da Pesquisa">
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="surveyTopics" value="limpeza"> Limpeza</label>
+                    <label><input type="checkbox" name="surveyTopics" value="organizacao"> Organização</label>
+                    <label><input type="checkbox" name="surveyTopics" value="didatica"> Didática</label>
+                    <label><input type="checkbox" name="surveyTopics" value="respeito"> Respeito</label>
+                    <label><input type="checkbox" name="surveyTopics" value="atendimento"> Atendimento</label>
+                    <label><input type="checkbox" name="surveyTopics" value="infraestrutura"> Infraestrutura</label>
+                    <label><input type="checkbox" name="surveyTopics" value="equipamentos"> Equipamentos</label>
+                    <label><input type="checkbox" name="surveyTopics" value="conteudo"> Conteúdo</label>
+                </div>
+                <input type="text" id="customOption" placeholder="Adicionar opção personalizada">
+                <button onclick="addCustomOption()">Adicionar</button>
+                <button onclick="previewSurvey()">Pré-visualizar</button>
+                <button onclick="generateLink()">Gerar Link</button>
+                <button onclick="clearForm()">Fechar</button>
+                <div id="generatedLink"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="ai-analysis-modal" class="ai-analysis-modal">
+        <div class="ai-analysis-content">
+            <span class="close" onclick="closeAIAnalysis()">&times;</span>
+            <h2>Análise IA</h2>
+            <textarea id="ai-input" placeholder="Digite sua pergunta..."></textarea>
+            <button onclick="sendAIQuery()">Enviar</button>
+            <div id="ai-response"></div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Funções de Análise IA
+        function openAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'block';
+        }
+
+        function closeAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'none';
+        }
+
+        function sendAIQuery() {
+            const input = document.getElementById('ai-input').value;
+            if (input) {
+                // Aqui você integraria com a API de IA para obter uma resposta
+                document.getElementById('ai-response').innerHTML = 'Resposta da IA para: ' + input;
+            }
+        }
+
+        // Outros scripts relacionados aos gráficos e funcionalidades da página
+        // (Conteúdo da função updateChart e outros omitidos por brevidade)
+    </script>
+</body>
+
+</html>
 
