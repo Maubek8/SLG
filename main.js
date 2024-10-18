@@ -7,16 +7,22 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        show: false,  // Inicialmente não exibe a janela até que esteja pronta
         webPreferences: {
-            preload: path.join(__dirname, 'src/js/preload.js'), // Pré-carregamento seguro
-            contextIsolation: true, // Garante que o contexto da página web seja isolado do contexto Node.js
-            enableRemoteModule: false, // Desabilita o uso do módulo remoto
-            nodeIntegration: false // Recomendado false para segurança
+            nodeIntegration: false,
+            contextIsolation: true,
+            webSecurity: true,
+            preload: path.join(__dirname, 'src/js/preload.js')  // Arquivo para comunicação segura
         }
     });
 
     // Carregar a página de login ao iniciar
     mainWindow.loadFile(path.join(__dirname, 'src/html/login.html'));
+
+    // Mostrar a janela quando estiver pronta
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
 
     // Se a janela for fechada
     mainWindow.on('closed', function () {
