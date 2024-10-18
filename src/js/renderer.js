@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Função de login
     const loginButton = document.getElementById('login-button');
     if (loginButton) {
         loginButton.addEventListener('click', () => {
@@ -11,5 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Usuário ou senha inválidos');
             }
         });
+    }
+
+    // Carregar gráficos e cronograma no dashboard
+    if (window.location.pathname.endsWith('dashboard.html')) {
+        generateCharts();
+        loadSchedule();
     }
 });
