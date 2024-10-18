@@ -221,4 +221,26 @@
             alert("Formulário de registro de despesa será aberto aqui.");
         }
 
-        function
+        function generateFinancialReport() {
+            alert("Relatório financeiro será gerado aqui.");
+        }
+
+        // Funções de Análise IA
+        function openAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'block';
+        }
+
+        function closeAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'none';
+        }
+
+        function sendAIQuery() {
+            const input = document.getElementById('ai-input').value;
+            if (input) {
+                document.getElementById('ai-response').innerText = "Resposta da IA: Simulação de resposta para a consulta: " + input;
+            }
+        }
+    </script>
+</body>
+
+</html>
