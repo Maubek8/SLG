@@ -1,1 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMGEs - Recursos Humanos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>SIMGEs-Simlab</h2>
+            <p>Powered by MK</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="atendimento.html">Atendimento</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="cronograma.html">Cronograma</a></li>
+                <li><a href="financeiro.html">Financeiro</a></li>
+                <li><a href="logistica.html">Logística</a></li>
+                <li><a href="recursos-humanos.html" class="active">Recursos Humanos</a></li>
+                <li><a href="satisfacao.html">Satisfação</a></li>
+                <li><a href="index.html">Sair</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="analysis-button" onclick="openAIAnalysis()">Análise IA</button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Gestão de Recursos Humanos</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="rh-grid">
+                <div class="rh-item">
+                    <h3>Distribuição de Funcionários por Departamento</h3>
+                    <div class="chart-container">
+                        <canvas id="employeeDistributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="rh-item">
+                    <h3>Rotatividade de Pessoal</h3>
+                    <div class="chart-container">
+                        <canvas id="turnoverChart"></canvas>
+                    </div>
+                </div>
+                <div class="rh-item">
+                    <h3>Horas de Treinamento por Mês</h3>
+                    <div class="chart-container">
+                        <canvas id="trainingHoursChart"></canvas>
+                    </div>
+                </div>
+                <div class="rh-item">
+                    <h3>Avaliação de Desempenho</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rh-item">
+                <h3>Resumo de Pessoal</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total de Funcionários</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>Professores</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>Administrativo</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td>Técnicos de Simulação</td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-button" onclick="showEmployeeForm()">Cadastrar Funcionário</button>
+                <button class="action-button" onclick="showTrainingForm()">Agendar Treinamento</button>
+                <button class="action-button" onclick="generateHRReport()">Gerar Relatório de RH</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="ai-analysis-modal" class="ai-analysis-modal">
+        <div class="ai-analysis-content">
+            <span class="close" onclick="closeAIAnalysis()">&times;</span>
+            <h2>Análise IA</h2>
+            <textarea id="ai-input" placeholder="Digite sua pergunta..."></textarea>
+            <button onclick="sendAIQuery()">Enviar</button>
+            <div id="ai-response"></div>
+        </div>
+    </div>
+
+    <script>
+        // Função de navegação
+        function navigateTo(page) {
+            window.location.href = page + ".html";
+        }
+
+        // Dados simulados para os gráficos
+        const employeeDistributionData = {
+            labels: ['Professores', 'Administrativo', 'Técnicos de Simulação'],
+            datasets: [{
+                data: [80, 40, 30],
+                backgroundColor: ['#3498db', '#2ecc71', '#f1c40f']
+            }]
+        };
+
+        const turnoverData = {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [{
+                label: 'Taxa de Rotatividade (%)',
+                data: [2.5, 2.0, 2.2, 1.8, 2.1, 1.9],
+                borderColor: '#e74c3c',
+                fill: false
+            }]
+        };
+
+        const trainingHoursData = {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [{
+                label: 'Horas de Treinamento',
+                data: [120, 150, 180, 200, 170, 190],
+                backgroundColor: '#3498db'
+            }]
+        };
+
+        const performanceData = {
+            labels: ['Excelente', 'Bom', 'Satisfatório', 'Precisa Melhorar'],
+            datasets: [{
+                data: [30, 45, 20, 5],
+                backgroundColor: ['#2ecc71', '#3498db', '#f1c40f', '#e74c3c']
+            }]
+        };
+
+        // Configuração e renderização dos gráficos
+        new Chart(document.getElementById('employeeDistributionChart').getContext('2d'), {
+            type: 'pie',
+            data: employeeDistributionData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        new Chart(document.getElementById('turnoverChart').getContext('2d'), {
+            type: 'line',
+            data: turnoverData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('trainingHoursChart').getContext('2d'), {
+            type: 'bar',
+            data: trainingHoursData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('performanceChart').getContext('2d'), {
+            type: 'doughnut',
+            data: performanceData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Funções para as ações dos botões
+        function showEmployeeForm() {
+            alert("Formulário de cadastro de funcionário será aberto aqui.");
+        }
+
+        function showTrainingForm() {
+            alert("Formulário de agendamento de treinamento será aberto aqui.");
+        }
+
+        function generateHRReport() {
+            alert("Relatório de RH será gerado e baixado aqui.");
+        }
+
+        // Funções de Análise IA
+        function openAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'block';
+        }
+
+        function closeAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'none';
+        }
+
+        function sendAIQuery() {
+            const input = document.getElementById('ai-input').value;
+            if (input) {
+                // Aqui você integraria com a API de IA para obter uma resposta
+                document.getElementById('ai-response').innerText = "Resposta gerada pela IA (simulada).";
+            }
+        }
+    </script>
+</body>
+
+</html>
 
