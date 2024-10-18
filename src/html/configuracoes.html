@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMGEs - Configurações</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js"></script>
+</head>
+<body>
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>SIMGEs-Simlab</h2>
+            <p>Powered by MK</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="atendimento.html">Atendimento</a></li>
+                <li><a href="configuracoes.html" class="active">Configurações</a></li>
+                <li><a href="cronograma.html">Cronograma</a></li>
+                <li><a href="financeiro.html">Financeiro</a></li>
+                <li><a href="logistica.html">Logística</a></li>
+                <li><a href="recursos-humanos.html">Recursos Humanos</a></li>
+                <li><a href="satisfacao.html">Satisfação</a></li>
+                <li><a href="index.html">Sair</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="analysis-button" onclick="openAIAnalysis()">Análise IA</button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Configurações do Sistema</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="settings-grid">
+                <div class="settings-item">
+                    <h3>Gerenciar Usuários</h3>
+                    <p>Adicione, remova ou edite os usuários do sistema, gerenciando suas permissões e acessos.</p>
+                    <button class="action-button">Gerenciar Usuários</button>
+                </div>
+                <div class="settings-item">
+                    <h3>Configurações de Segurança</h3>
+                    <p>Configure as opções de segurança, como autenticação de dois fatores e métodos de login.</p>
+                    <button class="action-button">Segurança</button>
+                </div>
+                <div class="settings-item">
+                    <h3>Gestão de Versões Beta</h3>
+                    <p>Armazene e gerencie diferentes versões do sistema, incluindo betas para testes.</p>
+                    <button class="action-button" onclick="manageBetaVersions()">Versões Beta</button>
+                </div>
+                <div class="settings-item">
+                    <h3>Backup e Restauração</h3>
+                    <p>Realize backups regulares do sistema e restaure dados quando necessário.</p>
+                    <button class="action-button">Backup</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Análise IA -->
+    <div id="ai-analysis-modal" class="ai-analysis-modal">
+        <div class="ai-analysis-content">
+            <span class="close" onclick="closeAIAnalysis()">&times;</span>
+            <h2>Análise IA</h2>
+            <textarea id="ai-input" placeholder="Digite sua pergunta..."></textarea>
+            <button onclick="sendAIQuery()">Enviar</button>
+            <div id="ai-response"></div>
+        </div>
+    </div>
+
+    <script>
+        // Funções de Análise IA
+        function openAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'block';
+        }
+
+        function closeAIAnalysis() {
+            document.getElementById('ai-analysis-modal').style.display = 'none';
+        }
+
+        function sendAIQuery() {
+            const input = document.getElementById('ai-input').value;
+            if (input) {
+                // Aqui você integraria com a API de IA para obter uma resposta
+                document.getElementById('ai-response').innerHTML = "<p>Resposta da IA baseada na consulta: " + input + "</p>";
+            }
+        }
+
+        function manageBetaVersions() {
+            alert("A funcionalidade de gerenciamento de versões beta será implementada aqui.");
+        }
+    </script>
+</body>
+</html>
 
