@@ -1,17 +1,23 @@
-// renderer.js
-
-// Exemplo: adicione um evento de clique ao botão "Entrar"
 document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
+    const iaPromptInput = document.getElementById('iaPrompt');
+    const iaResponseDiv = document.getElementById('iaResponse');
+
     if (loginButton) {
         loginButton.addEventListener('click', () => {
-            // Aqui você pode incluir lógica de validação de login ou outras interações
             alert('Botão "Entrar" foi clicado!');
         });
     }
 
-    // Exemplo: usar funções expostas no `preload.js`
-    if (window.electronAPI) {
-        window.electronAPI.exemploFuncao();
+    // Adicionando funcionalidade para o botão que interage com a IA
+    const askAIButton = document.getElementById('askAIButton');
+    if (askAIButton) {
+        askAIButton.addEventListener('click', async () => {
+            const prompt = iaPromptInput.value;
+            iaResponseDiv.textContent = 'Aguardando resposta...';
+
+            const response = await window.electronAPI.askAI(prompt);
+            iaResponseDiv.textContent = response;
+        });
     }
 });
