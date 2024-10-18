@@ -1,10 +1,9 @@
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
+function login(username, password) {
     if (username === 'admin' && password === '1234') {
-        window.location.href = 'dashboard.html';  // Redireciona para o dashboard
+        return true;  // Login bem-sucedido
     } else {
-        alert('Usuário ou senha inválidos');
+        return false;  // Falha no login
     }
 }
+
+module.exports = { login };
