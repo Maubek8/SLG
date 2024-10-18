@@ -1,38 +1,37 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+let mainWindow;
+
 function createWindow() {
-  // Cria uma janela do navegador
-  const win = new BrowserWindow({
-    width: 1024,
-    height: 768,
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false,  // Desabilitar nodeIntegration por segurança
-      contextIsolation: true,  // Ativar o contextIsolation para segurança
+      contextIsolation: true,
+      enableRemoteModule: false,
+      nodeIntegration: false
     }
   });
 
-  // Carrega a página HTML principal
-  win.loadFile('index.html');
+  mainWindow.loadFile('index.html');
 
-  // Abre as DevTools opcionalmente (para depuração)
-  // win.webContents.openDevTools();
+  mainWindow.on('closed', function () {
+    mainWindow = null;
+  });
 }
 
-// Chamado quando o Electron está pronto para criar janelas
 app.on('ready', createWindow);
 
-// Sai quando todas as janelas estão fechadas, exceto no macOS
-app.on('window-all-closed', () => {
+app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-// No macOS, recria a janela quando o ícone do dock é clicado
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+app.on('activate', function () {
+  if (mainWindow === null) {
     createWindow();
   }
 });
