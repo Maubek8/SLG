@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const apiKey = process.env.OPENAI_API_KEY;
 
 async function askAI() {
     const prompt = document.getElementById('iaPrompt').value;
-    
+
     if (!prompt) {
         document.getElementById('iaResponse').textContent = 'Por favor, digite uma pergunta.';
         return;
@@ -31,4 +33,3 @@ async function askAI() {
         console.error('Erro:', error);
     }
 }
-
