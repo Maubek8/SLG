@@ -1,59 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - SIMGEs Simlab</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="../images/favi.ico" type="image/x-icon">
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('../images/do.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-    .header {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: white;
-      text-align: right;
-    }
-    .header h1 {
-      font-size: 1.5em;
-      margin: 0;
-    }
-    .header p {
-      font-size: 0.8em;
-      margin: 0;
-    }
-    .login-button {
-      padding: 15px 30px;
-      background-color: #007bff;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    .login-button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMGEs - Login</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/favi.ico" type="image/x-icon">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background: url('../images/do.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+            margin-right: 10%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .branding {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .branding h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .branding p {
+            margin: 5px 0 0;
+            font-size: 12px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="header">
-    <h1>SIMGEs-Simlab</h1>
-    <p>Powered by MK</p>
-  </div>
+    <div class="branding">
+        <h2>SIMGEs - SimLab</h2>
+        <p>Powered by MK</p>
+    </div>
 
-  <button class="login-button" onclick="login()">Entrar</button>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
 
-  <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            window.location.href = 'dashboard.html';
+        });
+    </script>
 </body>
+
 </html>
